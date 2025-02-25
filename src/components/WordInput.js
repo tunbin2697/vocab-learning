@@ -1,9 +1,8 @@
 import React, { useRef, useState } from "react";
-import WordList from "./WordList";
 import { saveWord } from "./db";
 import ImageSelector from "./ImageSelector";
 
-const WordInput = () => {
+const WordInput = ({ onSubmit }) => {
   const [word, setWord] = useState("");
   const [meaning, setMeaning] = useState("");
   const [imageSearch, setImageSearch] = useState("");
@@ -19,6 +18,7 @@ const WordInput = () => {
     e.preventDefault();
     if (word && meaning) {
       const newWord = { word, meaning, imageUrl, addToFlashcard: false };
+      onSubmit();
       await handleAddWord(newWord);
       setWord("");
       setMeaning("");
@@ -61,7 +61,10 @@ const WordInput = () => {
           type="text"
           placeholder="Search for image"
           value={imageSearch}
-          onChange={(e) => setImageSearch(e.target.value)}
+          onChange={(e) => {
+            if (showChooseImage) setShowChooseImage(false);
+            setImageSearch(e.target.value);
+          }}
           className="border p-2 rounded-sm w-full"
         />
         <button
@@ -83,8 +86,6 @@ const WordInput = () => {
           Add Word
         </button>
       </form>
-      {console.log("re render wordinput")}
-      <WordList />
     </>
   );
 };

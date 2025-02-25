@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { getAllWord, removeData, saveWord } from "./db";
 
-const WordList = () => {
-  const [words, setWords] = useState([]);
+const WordList = ({ wordParam }) => {
+  const [words, setWords] = useState(wordParam);
 
   const handleAddToFlashcards = async (word) => {
     if (!word.addToFlashcard) {
@@ -25,22 +25,11 @@ const WordList = () => {
   };
 
   useEffect(() => {
-    loadData();
-  }, []);
-
-  const loadData = async () => {
-    console.log("load Database");
-    const storedWords = await getAllWord("words");
-    setWords(storedWords);
-    const storedFlashcards = await getAllWord("flashcards");
-    storedFlashcards.forEach(async (word) => {
-      await saveWord(word, "words");
-    });
-  };
+    setWords(wordParam);
+  }, [wordParam]);
 
   return (
     <>
-      {console.log("re render wordList")}
       <div className="p-4">
         <h2 className="text-xl font-bold mb-2">All Words</h2>
         {words.length === 0 ? (

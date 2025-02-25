@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import NavBar from "./NavBar";
 const API_KEY = process.env.REACT_APP_PIXABAY_API_KEY;
 
 const ImageSelector = ({ word, onImageSelect }) => {
@@ -28,23 +29,27 @@ const ImageSelector = ({ word, onImageSelect }) => {
   };
 
   return (
-    <div className="grid grid-cols-2 gap-4 p-4 w-[600px] border rounded-sm">
-      {images.map((img, index) => (
-        <div className="flex justify-center items-center">
-          <div className="w-[200px] ">
-            <img
-              key={index}
-              src={img}
-              alt={`Vector for ${word}`}
-              className={`object-contain cursor-pointer rounded-md border-2 ${
-                selectedImage === img ? "border-blue-500" : "border-transparent"
-              }`}
-              onClick={() => handleImageSelect(img)}
-            />
+    <NavBar>
+      <div className="grid grid-cols-2 gap-4 p-4 w-[600px] border rounded-sm">
+        {images.map((img, index) => (
+          <div className="flex justify-center items-center">
+            <div className="w-[200px] ">
+              <img
+                key={index}
+                src={img}
+                alt={`Vector for ${word}`}
+                className={`object-contain cursor-pointer rounded-md border-2 ${
+                  selectedImage === img
+                    ? "border-blue-500"
+                    : "border-transparent"
+                }`}
+                onClick={() => handleImageSelect(img)}
+              />
+            </div>
           </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+    </NavBar>
   );
 };
 

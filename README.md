@@ -1,1 +1,1 @@
-Link to the web: https://github.com/tunbin2697/vocab-learning
+Link to the web: https://tunbin2697.github.io/vocab-learning/

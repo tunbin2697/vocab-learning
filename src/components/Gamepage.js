@@ -2,11 +2,8 @@ import MatchingGame from "./MatchingGame";
 import GuessImageGame from "./GuessImageGame";
 import NavBar from "./NavBar";
 import BlankFilling from "./BlankFilling";
-import { useState } from "react";
 
 const Gamepage = () => {
-  const [activeTab, setActiveTab] = useState(<MatchingGame />);
-
   const tabs = [
     {
       label: "Matching",
@@ -19,11 +16,7 @@ const Gamepage = () => {
     { label: "Blank Filling", content: <BlankFilling /> },
   ];
 
-  return (
-    <NavBar tabs={tabs} size={"text-[30px]"} setActiveTab={setActiveTab}>
-      {activeTab}
-    </NavBar>
-  );
+  return <NavBar tabs={tabs} />;
 };
 
 export default Gamepage;

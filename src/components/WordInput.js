@@ -44,6 +44,7 @@ const WordInput = ({ onSubmit }) => {
           placeholder="Word"
           value={word}
           onChange={(e) => {
+            if (showChooseImage) setShowChooseImage(false);
             setImageSearch(e.target.value);
             setWord(e.target.value);
           }}
@@ -53,7 +54,10 @@ const WordInput = ({ onSubmit }) => {
           type="text"
           placeholder="Meaning"
           value={meaning}
-          onChange={(e) => setMeaning(e.target.value)}
+          onChange={(e) => {
+            if (showChooseImage) setShowChooseImage(false);
+            setMeaning(e.target.value);
+          }}
           className="border p-2 rounded-sm w-full"
         />
         <p>Search for image</p>

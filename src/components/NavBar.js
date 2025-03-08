@@ -1,26 +1,39 @@
-function NavBar({ children, tabs, size, setActiveTab }) {
+import React, { useEffect, useState } from "react";
+
+function NavBar({ tabs, style }) {
+  const [activeTab, setActiveTab] = useState(tabs[0].content);
+
+  const handleTabClick = (tabContent) => {
+    setActiveTab(tabContent);
+  };
+
+  useEffect(() => {
+    setActiveTab(tabs[0].content);
+  }, [tabs]);
+
   return (
     <div className="p-4">
-      {/* Navigation Bar */}
-
       <nav className="flex justify-center space-x-4 mb-4 border-b pb-2">
         {tabs.map((tab) => {
           return (
             <button
-              onClick={() => setActiveTab(tab.content)}
-              className={`px-4 py-2 rounded-md ${
-                children?.type === tab.content.type
-                  ? "bg-blue-500 text-white"
-                  : "bg-gray-200"
-              }`}
+              onClick={() => handleTabClick(tab.content)}
+              className={
+                style
+                  ? style
+                  : `px-4 py-2 rounded-md ${
+                      activeTab === tab.content
+                        ? "bg-blue-500 text-white"
+                        : "bg-gray-200"
+                    }`
+              }
             >
               {tab.label}
             </button>
           );
         })}
       </nav>
-      {/* Display Active Tab */}
-      {children}
+      {activeTab}
     </div>
   );
 }
